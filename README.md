@@ -1,9 +1,27 @@
 # QueryQuiver
 
-
 ## Developer information
+
 ### setup
 
 ```shell
-docker compose build
+make setup
+```
+
+### test
+
+```shell
+make test
+```
+
+### lint
+
+```shell
+make lint
+```
+
+### format
+
+```shell
+make format
 ```
