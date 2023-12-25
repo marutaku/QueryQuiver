@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "query_quiver"
+version = "0.1.0"
+description = ""
+authors = ["marutaku <satouredstone@gmail.com>"]
+packages = [{ include = "query_quiver" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+openai = "^1.6.1"
+tiktoken = "^0.5.2"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.8.0"
+pyproject-flake8 = "^0.0.1-alpha.5"
+black = "^22.6.0"
+isort = "^5.10.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.flake8]
+max-line-length = 124
+exclude = [".git", "__pycache__"]
+
+[tool.black]
+line-length = 88
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.poetry.scripts]
+qieryquiver = "interpreter:start_terminal_interface"

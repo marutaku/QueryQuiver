@@ -1,0 +1,8 @@
+{
+    "python.linting.flake8Path": "pflake8",
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
+    "python.languageServer": "Pylance",
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv"
+}
