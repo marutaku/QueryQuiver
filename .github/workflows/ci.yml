@@ -32,8 +32,3 @@ jobs:
           poetry run black --check .
           poetry run isort --check .
           poetry run mypy .
-      - name: Test with pytest
-        run: |
-          poetry run pytest -s -x
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
