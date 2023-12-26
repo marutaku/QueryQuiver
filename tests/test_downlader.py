@@ -1,7 +1,4 @@
-from unittest.mock import MagicMock, Mock, patch
-
-import pytest
-from pytest_mock import MockFixture
+from unittest.mock import MagicMock
 
 from query_quiver.downloader import Downloader
 
