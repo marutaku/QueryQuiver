@@ -13,8 +13,9 @@ class WebPageInfo(TypedDict):
 
 
 class Downloader(object):
-    def __init__(self) -> None:
+    def __init__(self, client=requests) -> None:
         self.logger = create_logger(__name__)
+        self.client = client
 
     def extract_information_from_webpage(self, url: str) -> WebPageInfo:
         """Extract information from webpage"""
@@ -24,7 +25,7 @@ class Downloader(object):
     def download_webpage(self, url: str) -> str:
         """Download webpage from URL"""
         self.logger.info(f"Downloading {url}")
-        response = requests.get(url)
+        response = self.client.get(url)
         return response.text
 
     def parse_webpage_info(self, html: str) -> WebPageInfo:
