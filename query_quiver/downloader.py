@@ -28,16 +28,21 @@ class Downloader(object):
         return response.text
 
     def parse_webpage_info(self, html: str) -> WebPageInfo:
-        """Parse webpage info from HTML"""
+        """Parse webpage info from HTML
+
+        NOTE: bs4 type hints are not correct so we ignore many type errors
+        """
         self.logger.info("Parsing webpage info")
         soup = BeautifulSoup(html, "html.parser")
-        title = soup.title.string
+        title = soup.title.string or ""  # type: ignore
         description = soup.find("meta", attrs={"name": "description"})
-        description = description["content"] if description else ""
+        description_content = description["content"] if description else ""  # type: ignore
         keywords = soup.find("meta", attrs={"name": "keywords"})
-        keywords = keywords["content"].split(",") if keywords else []
+        keyword_contents = keywords["content"].split(",") if keywords else []  # type: ignore
         return WebPageInfo(
             title=title,
-            description=description,
-            keywords=keywords,
+            description=description_content
+            if isinstance(description_content, str)
+            else ",".join([str(d) for d in description_content]),
+            keywords=keyword_contents,
         )

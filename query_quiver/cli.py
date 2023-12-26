@@ -5,7 +5,7 @@ from query_quiver.downloader import Downloader
 
 
 def generate(
-    limit: int = 100, number_of_ideas: int = 10, chrome_history_path: str = None
+    limit: int = 100, number_of_ideas: int = 10, chrome_history_path: str | None = None
 ):
     """Generate idea of tech articles from Google Chrome history"""
     chrome_history = ChromeHistory(chrome_history_path=chrome_history_path)
