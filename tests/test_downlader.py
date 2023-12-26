@@ -1,5 +1,7 @@
 from unittest.mock import MagicMock
 
+import pytest
+
 from query_quiver.downloader import Downloader
 
 DUMMY_HTML = """
@@ -18,14 +20,23 @@ DUMMY_HTML = """
 </html>
 """
 
+DUMMY_URL = "https://example.com"
 
-def test_download_webpage():
+
+@pytest.fixture
+def mock_client():
     client_mock = MagicMock()
     client_mock.get.return_value = MagicMock(text=DUMMY_HTML)
-    downloader = Downloader(client=client_mock)
+    return client_mock
+
+
+def test_download_webpage(mock_client):
+    client_mock = MagicMock()
+    client_mock.get.return_value = MagicMock(text=DUMMY_HTML)
+    downloader = Downloader(client=mock_client)
     html = downloader.download_webpage("https://example.com")
+    mock_client.get.assert_called_once_with("https://example.com")
     assert html == DUMMY_HTML
-    # assert client_mock.assert_called_once_with("https://example.com")
 
 
 def test_parse_webpage_info():
@@ -38,14 +49,14 @@ def test_parse_webpage_info():
     }
 
 
-def test_extract_information_from_webpage():
+def test_extract_information_from_webpage(mock_client):
     client_mock = MagicMock()
     client_mock.get.return_value = MagicMock(text=DUMMY_HTML)
-    downloader = Downloader(client=client_mock)
+    downloader = Downloader(client=mock_client)
     webpage_info = downloader.extract_information_from_webpage("https://example.com")
+    mock_client.get.assert_called_once_with("https://example.com")
     assert webpage_info == {
         "title": "Test Title",
         "description": "Test Description",
         "keywords": ["test", " keywords"],
     }
-    # assert client_mock.get.assert_called_once_with("https://example.com")
