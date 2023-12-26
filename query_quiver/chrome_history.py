@@ -13,7 +13,7 @@ class ChromeHistory(object):
 
     def get_history(self, limit: int = 100) -> list:
         """Get history from Google Chrome history"""
-        with closing(sqlite3.connect(self.sqlite_path)) as conn:
+        with closing(sqlite3.connect(self.sqlite_path, timeout=5)) as conn:
             c = conn.cursor()
             c.execute(
                 """
