@@ -1,6 +1,7 @@
 import fire
 
 from query_quiver.chrome_history import ChromeHistory
+from query_quiver.downloader import Downloader
 
 
 def generate(
@@ -9,8 +10,10 @@ def generate(
     """Generate idea of tech articles from Google Chrome history"""
     chrome_history = ChromeHistory(chrome_history_path=chrome_history_path)
     histories = chrome_history.get_history(limit=limit)
-    for url, title in histories[:number_of_ideas]:
-        print(f"- [{title}]({url})")
+    downloader = Downloader()
+    for url, _ in histories[:number_of_ideas]:
+        webpage_info = downloader.extract_information_from_webpage(url)
+        print(f"{url}: {webpage_info}")
 
 
 def run():
