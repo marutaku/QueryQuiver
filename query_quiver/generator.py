@@ -8,12 +8,18 @@ from query_quiver.types import ChromeKeyword, WebPageInfo
 
 
 class ArticleIdeaGenerator(object):
-    def __init__(self, openai_api_key: str | None = None, language: str = "en") -> None:
+    def __init__(
+        self,
+        openai_api_key: str | None = None,
+        language: str = "en",
+        use_gpt4: bool = False,
+    ) -> None:
         self.logger = create_logger(__name__)
         self.openai_client = openai.Client(
             api_key=openai_api_key or os.environ["OPENAI_API_KEY"]
         )
         self.prompts = PROMPTS[language]
+        self.use_gpt4 = use_gpt4
 
     def generate_ideas(
         self,
@@ -46,7 +52,7 @@ class ArticleIdeaGenerator(object):
         self.logger.debug("Calling LLM API")
         self.logger.debug(f"system_prompt: {system_prompt}, user_prompt: {user_prompt}")
         response = self.openai_client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4-1106-preview" if self.use_gpt4 else "gpt-3.5-turbo-1106",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt},

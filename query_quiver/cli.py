@@ -22,6 +22,7 @@ def generate(
     openai_api_key: str | None = None,
     debug: bool = False,
     language: str = "en",
+    use_gpt4: bool = False,
 ):
     """Generate idea of tech articles from Google Chrome history"""
     setup_logging(debug)
