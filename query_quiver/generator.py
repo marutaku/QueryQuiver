@@ -3,16 +3,17 @@ import os
 import openai
 
 from query_quiver.logger import create_logger
-from query_quiver.prompt import IDEA_GENERATE_SYSTEM_PROMPT, IDEA_GENERATE_USER_PROMPT
+from query_quiver.prompt import PROMPTS
 from query_quiver.types import ChromeKeyword, WebPageInfo
 
 
 class ArticleIdeaGenerator(object):
-    def __init__(self, openai_api_key: str | None = None) -> None:
+    def __init__(self, openai_api_key: str | None = None, language: str = "en") -> None:
         self.logger = create_logger(__name__)
         self.openai_client = openai.Client(
             api_key=openai_api_key or os.environ["OPENAI_API_KEY"]
         )
+        self.prompts = PROMPTS[language]
 
     def generate_ideas(
         self,
@@ -31,8 +32,10 @@ class ArticleIdeaGenerator(object):
             ]
         )
         result = self.call_llm_api(
-            IDEA_GENERATE_SYSTEM_PROMPT.format(number_of_ideas=number_of_ideas),
-            IDEA_GENERATE_USER_PROMPT.format(
+            self.prompts["idea_generate_system_prompt"].format(
+                number_of_ideas=number_of_ideas
+            ),
+            self.prompts["idea_generate_user_prompt"].format(
                 visit_site_history=chrome_visit_site_history_str,
                 search_words_history=chrome_search_words_history_str,
             ),
