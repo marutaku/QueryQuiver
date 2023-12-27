@@ -29,13 +29,11 @@ def generate(
     downloader = Downloader()
     generator = ArticleIdeaGenerator(openai_api_key, language)
     histories = chrome_history.get_history(limit=query_history_limit)
+    urls = [history[0] for history in histories]
     search_words_histories = chrome_history.get_google_search_words_history(
         limit=query_history_limit
     )
-    webpage_infos = []
-    for url, _ in histories:
-        webpage_info = downloader.extract_information_from_webpage(url)
-        webpage_infos.append(webpage_info)
+    webpage_infos = downloader.extract_information_from_webpages(urls)
     print(
         generator.generate_ideas(
             chrome_visit_site_history=webpage_infos,
