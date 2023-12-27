@@ -21,12 +21,13 @@ def generate(
     chrome_history_path: str | None = None,
     openai_api_key: str | None = None,
     debug: bool = False,
+    language: str = "en",
 ):
     """Generate idea of tech articles from Google Chrome history"""
     setup_logging(debug)
     chrome_history = ChromeHistory(chrome_history_path)
     downloader = Downloader()
-    generator = ArticleIdeaGenerator(openai_api_key)
+    generator = ArticleIdeaGenerator(openai_api_key, language)
     histories = chrome_history.get_history(limit=query_history_limit)
     search_words_histories = chrome_history.get_google_search_words_history(
         limit=query_history_limit

@@ -16,6 +16,12 @@ pip install git+https://github.com/marutaku/QueryQuiver
 
 ## Usage
 
+Please close Google Chrome before using this tool.
+
+The tool references the SQLite database used internally by Google Chrome.
+
+While using GoogleChrome, this SQLite database will be locked and an error will occur.
+
 ```shell
 queryquiver generate
 ```
