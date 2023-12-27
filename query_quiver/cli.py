@@ -28,7 +28,7 @@ def generate(
     setup_logging(debug)
     chrome_history = ChromeHistory(chrome_history_path)
     downloader = Downloader()
-    generator = ArticleIdeaGenerator(openai_api_key, language)
+    generator = ArticleIdeaGenerator(openai_api_key, language, use_gpt4)
     histories = chrome_history.get_history(limit=query_history_limit)
     urls = [history[0] for history in histories]
     search_words_histories = chrome_history.get_google_search_words_history(
