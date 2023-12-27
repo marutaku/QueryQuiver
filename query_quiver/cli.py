@@ -6,8 +6,8 @@ from query_quiver.generator import ArticleIdeaGenerator
 
 
 def generate(
-    limit: int = 100,
-    number_of_ideas: int = 10,
+    limit: int = 20,
+    number_of_ideas: int = 5,
     chrome_history_path: str | None = None,
     openai_api_key: str | None = None,
 ):

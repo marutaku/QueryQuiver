@@ -21,3 +21,7 @@ format:
 .PHONY: build
 build:
 	poetry build
+
+.PHONY: install
+install:
+	pip install dist/*.whl

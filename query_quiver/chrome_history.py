@@ -20,6 +20,7 @@ class ChromeHistory(object):
         histories = self.fetch_data_from_chrome_history_db(
             """
             SELECT
+              DISTINCT
               CASE
                 WHEN INSTR(urls.url, "?") > 0 THEN SUBSTR(urls.url, 0, INSTR(urls.url, "?"))
                 ELSE urls.url
@@ -45,6 +46,7 @@ class ChromeHistory(object):
         histories = self.fetch_data_from_chrome_history_db(
             """
             SELECT
+              DISTINCT
               urls.url
             FROM
               visits

@@ -31,7 +31,7 @@ class Downloader(object):
         """
         self.logger.info("Parsing webpage info")
         soup = BeautifulSoup(html, "html.parser")
-        title = soup.title.string or ""  # type: ignore
+        title: str = soup.title.string if soup.title else ""  # type: ignore
         description = soup.find("meta", attrs={"name": "description"})
         description_content = description["content"] if description else ""  # type: ignore
         keywords = soup.find("meta", attrs={"name": "keywords"})
