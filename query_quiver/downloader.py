@@ -1,7 +1,9 @@
+import threading
 import time
 
 import requests
 from bs4 import BeautifulSoup
+from urllib3.util import parse_url
 
 from query_quiver.logger import create_logger
 from query_quiver.types import WebPageInfo
@@ -11,18 +13,34 @@ class Downloader(object):
     def __init__(self, client=requests) -> None:
         self.logger = create_logger(__name__)
         self.client = client
+        self.origin_locks: dict = {}
 
-    def extract_information_from_webpage(self, url: str) -> WebPageInfo:
+    def extract_information_from_webpages(self, urls: list[str]) -> list[WebPageInfo]:
         """Extract information from webpage"""
-        html = self.download_webpage(url)
-        return self.parse_webpage_info(html)
+        html_list = self.download_webpages(urls)
+        return [self.parse_webpage_info(html) for html in html_list]
 
-    def download_webpage(self, url: str) -> str:
-        """Download webpage from URL"""
-        self.logger.debug(f"Downloading {url}")
-        response = self.client.get(url)
-        time.sleep(0.1)
-        return response.text
+    def download_webpages(self, urls: list[str]) -> list[str]:
+        """Download webpages from URLs"""
+        results = []
+
+        def download(url: str):
+            """Download webpage from URL"""
+            origin = parse_url(url).host
+            with self.origin_locks.setdefault(origin, threading.Lock()):
+                response = self.client.get(url)
+                time.sleep(1)
+                results.append(response.text)
+
+        threads = []
+        for url in urls:
+            thread = threading.Thread(target=download, args=(url,))
+            threads.append(thread)
+            thread.start()
+
+        for thread in threads:
+            thread.join()
+        return results
 
     def parse_webpage_info(self, html: str) -> WebPageInfo:
         """Parse webpage info from HTML
