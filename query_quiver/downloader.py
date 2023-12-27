@@ -1,15 +1,10 @@
-from typing import TypedDict
+import time
 
 import requests
 from bs4 import BeautifulSoup
 
 from query_quiver.logger import create_logger
-
-
-class WebPageInfo(TypedDict):
-    title: str
-    description: str
-    keywords: list[str]
+from query_quiver.types import WebPageInfo
 
 
 class Downloader(object):
@@ -26,6 +21,7 @@ class Downloader(object):
         """Download webpage from URL"""
         self.logger.info(f"Downloading {url}")
         response = self.client.get(url)
+        time.sleep(0.1)
         return response.text
 
     def parse_webpage_info(self, html: str) -> WebPageInfo:
