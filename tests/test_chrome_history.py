@@ -3,6 +3,7 @@ from unittest.mock import patch
 import pytest
 
 from query_quiver.chrome_history import ChromeHistory
+from query_quiver.types import ChromeKeyword
 
 
 @pytest.fixture
@@ -37,10 +38,10 @@ def test_get_google_search_words_history(chrome_history: ChromeHistory):
         mock.return_value = dummy_histories
         histories = chrome_history.get_google_search_words_history()
         assert histories == [
-            {"keywords": ["example1"]},
-            {"keywords": ["example2"]},
-            {"keywords": ["example3"]},
-            {"keywords": ["example4"]},
-            {"keywords": ["example5"]},
+            ChromeKeyword(keywords=["example1"]),
+            ChromeKeyword(keywords=["example2"]),
+            ChromeKeyword(keywords=["example3"]),
+            ChromeKeyword(keywords=["example4"]),
+            ChromeKeyword(keywords=["example5"]),
         ]
         mock.assert_called_once()

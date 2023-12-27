@@ -60,9 +60,9 @@ class ChromeHistory(object):
             (limit,),
         )
         return [
-            {
-                "keywords": self.extract_chrome_query_from_url(url[0]),
-            }
+            ChromeKeyword(
+                keywords=self.extract_chrome_query_from_url(url[0]),
+            )
             for url in histories
         ]
 

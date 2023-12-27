@@ -1,11 +1,19 @@
-from typing import TypedDict
+from dataclasses import dataclass
 
 
-class WebPageInfo(TypedDict):
+@dataclass
+class WebPageInfo(object):
     title: str
     description: str
     keywords: list[str]
 
+    def __str__(self) -> str:
+        return f"title: {self.title}\ndescription: {self.description}\nkeywords: {self.keywords}"
 
-class ChromeKeyword(TypedDict):
+
+@dataclass
+class ChromeKeyword(object):
     keywords: list[str]
+
+    def __str__(self) -> str:
+        return f"keywords: {', '.join(self.keywords)}"
