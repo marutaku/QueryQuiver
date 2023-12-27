@@ -19,7 +19,7 @@ class Downloader(object):
 
     def download_webpage(self, url: str) -> str:
         """Download webpage from URL"""
-        self.logger.info(f"Downloading {url}")
+        self.logger.debug(f"Downloading {url}")
         response = self.client.get(url)
         time.sleep(0.1)
         return response.text
@@ -29,7 +29,7 @@ class Downloader(object):
 
         NOTE: bs4 type hints are not correct so we ignore many type errors
         """
-        self.logger.info("Parsing webpage info")
+        self.logger.debug("Parsing webpage info")
         soup = BeautifulSoup(html, "html.parser")
         title: str = soup.title.string if soup.title else ""  # type: ignore
         description = soup.find("meta", attrs={"name": "description"})

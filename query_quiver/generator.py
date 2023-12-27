@@ -40,8 +40,8 @@ class ArticleIdeaGenerator(object):
         return result
 
     def call_llm_api(self, system_prompt: str, user_prompt: str) -> str:
-        self.logger.info("Calling LLM API")
-        self.logger.info(f"system_prompt: {system_prompt}, user_prompt: {user_prompt}")
+        self.logger.debug("Calling LLM API")
+        self.logger.debug(f"system_prompt: {system_prompt}, user_prompt: {user_prompt}")
         response = self.openai_client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
