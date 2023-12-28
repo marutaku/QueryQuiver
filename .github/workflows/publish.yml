@@ -1,19 +1,17 @@
-name: Check code
+name: Publish
 
 on:
   push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
+    tags:
+      - v*
 
 jobs:
-  lint-and-test:
-    runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-20.04
     strategy:
       fail-fast: true
       matrix:
         python-version: ["3.11"]
-
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
@@ -26,9 +24,12 @@ jobs:
       - name: Install dependencies
         run: |
           make setup
-      - name: Lint
+      - name: Generate documents
         run: |
-          make lint
-      - name: Test
-        run: |
-          make test
+          make gen-docs
+      - name: Publish new documents
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref == 'refs/heads/main' }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
