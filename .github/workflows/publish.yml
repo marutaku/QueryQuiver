@@ -8,8 +8,10 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-20.04
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
+    strategy:
+      fail-fast: true
+      matrix:
+        python-version: ["3.11"]
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
@@ -22,10 +24,10 @@ jobs:
       - name: Install dependencies
         run: |
           make setup
-      - name: Install dependencies
+      - name: Generate documents
         run: |
           make gen-docs
-      - name: Upadte documents
+      - name: Publish new documents
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
