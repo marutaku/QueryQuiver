@@ -11,12 +11,26 @@ DEFAULT_GOOGLE_CHROME_HISTORY_SQLITE_PATH = f"/Users/{os.environ.get('USER')}/Li
 
 class ChromeHistory(object):
     def __init__(self, chrome_history_path: str | None = None) -> None:
+        """Initialize
+
+        Args:
+            chrome_history_path (str | None, optional): Path of chrome history SQLite file.
+
+            Default is `~/Library/Application Support/Google/Chrome/Default/History`.
+        """
         self.sqlite_path = (
             chrome_history_path or DEFAULT_GOOGLE_CHROME_HISTORY_SQLITE_PATH
         )
 
-    def get_history(self, limit: int = 100) -> list:
-        """Get history from Google Chrome history"""
+    def get_history(self, limit: int = 100) -> list[list[str]]:
+        """Get past visited sites from Google Chrome history
+
+        Args:
+            limit (int, optional): Number of histories to fetch. Defaults to 100.
+
+        Returns:
+            list[list[str]]: List of past visited site urls
+        """
         histories = self.fetch_data_from_chrome_history_db(
             """
             SELECT
@@ -42,7 +56,14 @@ class ChromeHistory(object):
         return histories
 
     def get_google_search_words_history(self, limit: int = 100) -> list[ChromeKeyword]:
-        """Get history from Google Chrome history"""
+        """Extract past Google search words from Google Chrome history
+
+        Args:
+            limit (int, optional): Number of histories to fetch. Defaults to 100.
+
+        Returns:
+            list[ChromeKeyword]: List of past Google search words
+        """
         histories = self.fetch_data_from_chrome_history_db(
             """
             SELECT
