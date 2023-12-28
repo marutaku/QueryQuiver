@@ -1,15 +1,16 @@
+![QueryQuiver](./logos/query_quiver_banner.png)
 # QueryQuiver
 
 QueryQuiver estimates your interests based on your past Google Chrome search history and suggests technical article ideas that you might be comfortable writing about.
 
 ## Install
 
-```shell
+<!-- ```shell
 pip install queryquiver
 ```
 
 or If you want to install from source code, you can install it as follows.
-
+ -->
 ```shell
 pip install git+https://github.com/marutaku/QueryQuiver
 ```
@@ -52,6 +53,16 @@ FLAGS
         Default: None
     -o, --openai_api_key=OPENAI_API_KEY
         Type: Optional[str | None]
+        Default: None
+    -d, --debug=DEBUG
+        Type: bool
+        Default: False
+    -l, --language=LANGUAGE
+        Type: str
+        Default: 'en'
+    -u, --use_gpt4=USE_GPT4
+        Type: bool
+        Default: False
 ```
 
 ## Developer information
