@@ -52,7 +52,9 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
       - name: Build project for distribution
-        run: poetry build
+        run: |
+          poetry self add "poetry-dynamic-versioning[plugin]"
+          poetry build
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
