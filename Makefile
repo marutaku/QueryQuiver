@@ -28,4 +28,4 @@ install:
 
 .PHONY: gen-docs
 gen-docs:
-	poetry run pdoc --output-dir tmp query_quiver
+	poetry run pdoc --output-dir docs query_quiver

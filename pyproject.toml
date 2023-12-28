@@ -1,9 +1,12 @@
 [tool.poetry]
 name = "query_quiver"
-version = "0.1.0"
-description = ""
+version = "0.0.1"
+description = "Support brainstorming for technical blog using your Google Chrome history."
 authors = ["marutaku <satouredstone@gmail.com>"]
 packages = [{ include = "query_quiver" }]
+homepage = "https://github.com/marutaku"
+repository = "https://github.com/marutaku/QueryQuiver"
+readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
