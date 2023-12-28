@@ -25,3 +25,7 @@ build:
 .PHONY: install
 install:
 	pip install dist/*.whl
+
+.PHONY: gen-docs
+gen-docs:
+	poetry run pdoc --output-dir tmp query_quiver
