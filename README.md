@@ -1,3 +1,4 @@
+![QueryQuiver](./logos/query_quiver_banner.png)
 # QueryQuiver
 
 QueryQuiver estimates your interests based on your past Google Chrome search history and suggests technical article ideas that you might be comfortable writing about.
