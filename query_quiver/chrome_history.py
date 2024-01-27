@@ -4,6 +4,7 @@ from contextlib import closing
 from typing import Any
 from urllib.parse import unquote
 
+from query_quiver.logger import create_logger
 from query_quiver.types import ChromeKeyword
 
 DEFAULT_GOOGLE_CHROME_HISTORY_SQLITE_PATH = f"/Users/{os.environ.get('USER')}/Library/Application Support/Google/Chrome/Default/History"  # noqa: E501
@@ -21,6 +22,7 @@ class ChromeHistory(object):
         self.sqlite_path = (
             chrome_history_path or DEFAULT_GOOGLE_CHROME_HISTORY_SQLITE_PATH
         )
+        self.logger = create_logger(__name__)
 
     def get_history(self, limit: int = 100) -> list[list[str]]:
         """Get past visited sites from Google Chrome history
@@ -31,6 +33,7 @@ class ChromeHistory(object):
         Returns:
             list[list[str]]: List of past visited site urls
         """
+        self.logger.debug("Fetching history")
         histories = self.fetch_data_from_chrome_history_db(
             """
             SELECT
@@ -53,6 +56,7 @@ class ChromeHistory(object):
             """,
             (limit,),
         )
+        self.logger.debug(f"Found {len(histories)} histories")
         return histories
 
     def get_google_search_words_history(self, limit: int = 100) -> list[ChromeKeyword]:
