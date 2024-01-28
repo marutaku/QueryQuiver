@@ -54,7 +54,7 @@ jobs:
       - name: Build project for distribution
         run: |
           poetry self add "poetry-dynamic-versioning[plugin]"
-          poetry build
+          make build
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
@@ -62,3 +62,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           draft: false
           prerelease: steps.check-version.outputs.prerelease == 'true'
+      - name: Build and publish
+        env:
+          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.POETRY_PYPI_TOKEN_PYPI }}
+        run: |
+          poetry publish
