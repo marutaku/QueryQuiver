@@ -1,14 +1,14 @@
 ![QueryQuiver](https://raw.githubusercontent.com/marutaku/QueryQuiver/main/logos/query_quiver_banner.png)
 
-<div style="display: flex; gap: 8px">
+<div style="display: flex; gap: 8px; ">
 
-[![Check code](https://github.com/marutaku/QueryQuiver/actions/workflows/ci.yml/badge.svg)](https://github.com/marutaku/QueryQuiver/actions/workflows/ci.yml)
+<a href="https://github.com/marutaku/QueryQuiver/actions"><img alt="Actions Status" src="https://github.com/marutaku/QueryQuiver/actions/workflows/ci.yml/badge.svg"></a>
 
-![PyPI - Version](https://img.shields.io/pypi/v/query_quiver)
+<a href="https://github.com/marutaku/QueryQuiver"><img alt="PyPI - Version" src="https://img.shields.io/pypi/v/query_quiver"></a>
 
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/query_quiver)
+<a href="https://github.com/marutaku/QueryQuiver"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/query_quiver"></a>
 
-![PyPI - Wheel](https://img.shields.io/pypi/wheel/query_quiver)
+<a href="https://github.com/marutaku/QueryQuiver"><img alt="PyPI - Wheel" src="https://img.shields.io/pypi/wheel/query_quiver"></a>
 
 </div>
 
@@ -23,7 +23,6 @@ pip install queryquiver
 ```
 
 or If you want to install from source code, you can install it as follows.
-
 
 ```shell
 pip install git+https://github.com/marutaku/QueryQuiver
