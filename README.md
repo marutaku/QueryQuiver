@@ -1,6 +1,6 @@
 ![QueryQuiver](https://raw.githubusercontent.com/marutaku/QueryQuiver/main/logos/query_quiver_banner.png)
 
-<div style="display: flex; gap: 8px; ">
+<p>
 
 <a href="https://github.com/marutaku/QueryQuiver/actions"><img alt="Actions Status" src="https://github.com/marutaku/QueryQuiver/actions/workflows/ci.yml/badge.svg"></a>
 
@@ -10,7 +10,7 @@
 
 <a href="https://github.com/marutaku/QueryQuiver"><img alt="PyPI - Wheel" src="https://img.shields.io/pypi/wheel/query_quiver"></a>
 
-</div>
+</p>
 
 # QueryQuiver
 
