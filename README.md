@@ -18,12 +18,12 @@ QueryQuiver estimates your interests based on your past Google Chrome search his
 
 ## Install
 
-<!-- ```shell
+```shell
 pip install queryquiver
 ```
 
 or If you want to install from source code, you can install it as follows.
- -->
+
 
 ```shell
 pip install git+https://github.com/marutaku/QueryQuiver
