@@ -1,4 +1,17 @@
-![QueryQuiver](./logos/query_quiver_banner.png)
+![QueryQuiver](https://raw.githubusercontent.com/marutaku/QueryQuiver/main/logos/query_quiver_banner.png)
+
+<div style="display: flex; gap: 8px">
+
+[![Check code](https://github.com/marutaku/QueryQuiver/actions/workflows/ci.yml/badge.svg)](https://github.com/marutaku/QueryQuiver/actions/workflows/ci.yml)
+
+![PyPI - Version](https://img.shields.io/pypi/v/query_quiver)
+
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/query_quiver)
+
+![PyPI - Wheel](https://img.shields.io/pypi/wheel/query_quiver)
+
+</div>
+
 # QueryQuiver
 
 QueryQuiver estimates your interests based on your past Google Chrome search history and suggests technical article ideas that you might be comfortable writing about.
@@ -11,6 +24,7 @@ pip install queryquiver
 
 or If you want to install from source code, you can install it as follows.
  -->
+
 ```shell
 pip install git+https://github.com/marutaku/QueryQuiver
 ```
